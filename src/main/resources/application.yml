@@ -1,0 +1,5 @@
+logging.level.com.worldremit.clients.ATMClient: DEBUG
+
+finder:
+  maxRadius: 10
+  maxResults: 21
