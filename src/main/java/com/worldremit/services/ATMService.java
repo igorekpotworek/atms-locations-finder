@@ -24,7 +24,7 @@ public class ATMService {
         .availableATMs(center.getLatitude(), center.getLongitude(), (int) ceil(radius))
         .getAtms()
             .stream()
-            .map(atm -> new ATMLocation(atm.getId(),atm.getCoordinates(),center))
+            .map(atm -> new ATMLocation(atm.getId(), atm.getCoordinates(), center))
             .collect(toSet());
   }
 

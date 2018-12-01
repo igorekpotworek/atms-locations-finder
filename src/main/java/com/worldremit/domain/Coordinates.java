@@ -44,11 +44,4 @@ public class Coordinates {
     dist = dist * 69.1;
     return dist; // km dist * 1.609344;
   }
-
-  //TODO
-  public static void main(String[] args) {
-      Coordinates c1 =new Coordinates(51.50551621597067,-0.0180120225995);
-      Coordinates c2 =new Coordinates(51.50551621597067 ,-0.0180120225995+milesToDegreesLong(10,51.50551621597067));
-      System.out.println(c1.distance(c2));
-  }
 }

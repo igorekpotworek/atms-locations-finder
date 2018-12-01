@@ -15,7 +15,7 @@ import java.io.IOException;
 @Value
 @JsonDeserialize(using = ATM.ATMDeserializer.class)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-class ATM {
+public class ATM {
 
   @EqualsAndHashCode.Include private String id;
   private Coordinates coordinates;
