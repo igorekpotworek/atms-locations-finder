@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
 @ControllerAdvice
@@ -13,5 +14,11 @@ public class ATMLocationsFinderExceptionHandler {
   public ResponseEntity<ErrorMessage> handleThrowable(Exception ex) {
     ErrorMessage errorObj = new ErrorMessage(ex.getMessage());
     return new ResponseEntity<>(errorObj, INTERNAL_SERVER_ERROR);
+  }
+
+  @ExceptionHandler(InvalidRadiusException.class)
+  public ResponseEntity<ErrorMessage> handleInvalidRadiusException(InvalidRadiusException ex) {
+    ErrorMessage errorObj = new ErrorMessage(ex.getMessage());
+    return new ResponseEntity<>(errorObj, BAD_REQUEST);
   }
 }

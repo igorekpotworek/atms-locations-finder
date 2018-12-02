@@ -25,7 +25,7 @@ public class Coordinates {
         longitude + distanceByLongitude.toDegreesLong(latitude));
   }
 
-  Distance distance(Coordinates other) {
+  public Distance distance(Coordinates other) {
     double theta = longitude - other.longitude;
     double dist =
         sin(toRadians(latitude)) * sin(toRadians(other.latitude))

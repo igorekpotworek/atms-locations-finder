@@ -26,11 +26,11 @@ class CircleCoveringAlgorithm {
     this.atmGateway = atmGateway;
     this.properties = properties;
     // square inscribed in a maximum available by API circle will be grid unit square
-    this.grid = new Grid(sqrt(2) * properties.getMaxRadius().getMiles());
+    this.grid = new Grid(sqrt(2) * properties.getMaxUnderlyingClientRadius().getMiles());
   }
 
   Set<ATMLocation> getAtmLocationsUsingSmallerRequests(Coordinates center, Distance radius) {
-    Set<ATMLocation> interior = atmGateway.availableATMLocations(center, properties.getMaxRadius());
+    Set<ATMLocation> interior = atmGateway.availableATMLocations(center, properties.getMaxUnderlyingClientRadius());
     AlgorithmResult firstIteration = new AlgorithmResult(0, interior, radiusForLayerNumber(0));
 
     return Stream.iterate(

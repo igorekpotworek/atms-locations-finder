@@ -1,5 +1,6 @@
 package com.worldremit.atms.controllers;
 
+import com.worldremit.atms.config.ValidationProperties;
 import com.worldremit.atms.domain.ATMLocation;
 import com.worldremit.atms.domain.Coordinates;
 import com.worldremit.atms.domain.Distance;
@@ -22,6 +23,7 @@ import java.util.Set;
 public class ATMLocationsFinderController {
 
   private final ATMLocationsFinder atmLocationsFinder;
+  private final ValidationProperties properties;
 
   @GetMapping("atm")
   public Set<ATMLocation> availableATMs(
@@ -29,8 +31,14 @@ public class ATMLocationsFinderController {
       @RequestParam(value = "long") double longitude,
       @RequestParam(value = "radius", required = false, defaultValue = "1") double radius,
       @RequestParam(value = "unit", required = false, defaultValue = "m") Unit unit) {
+    Distance distance = Distance.of(radius, unit);
+    validateRadius(distance);
     return atmLocationsFinder.limitedAvailableATMsLocations(
-        new Coordinates(latitude, longitude), Distance.of(radius, unit));
+        new Coordinates(latitude, longitude), distance);
+  }
+
+  private void validateRadius(Distance radius) {
+    if (radius.getMiles() > properties.getMaxRadiusInMiles()) throw new InvalidRadiusException();
   }
 
   @InitBinder

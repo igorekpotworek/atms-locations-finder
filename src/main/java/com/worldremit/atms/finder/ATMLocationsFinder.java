@@ -26,7 +26,7 @@ public class ATMLocationsFinder {
   }
 
   private Set<ATMLocation> availableATMsLocations(Coordinates center, Distance radius) {
-    if (radius.compareTo(atmLocationsFinderProperties.getMaxRadius()) <= 0) {
+    if (radius.compareTo(atmLocationsFinderProperties.getMaxUnderlyingClientRadius()) <= 0) {
       return atmGateway.availableATMLocations(center, radius);
     } else {
       return circleCoveringAlgorithm.getAtmLocationsUsingSmallerRequests(center, radius);

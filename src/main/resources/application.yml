@@ -1,8 +1,11 @@
 logging.level.com.worldremit.atms.clients.ATMClient: DEBUG
 
 finder:
-  maxRadiusInMiles: 10
+  maxUnderlyingClientRadiusInMiles: 10
   maxResults: 21
+
+validation:
+  maxRadiusInMiles: 31
 
 client:
   url: https://api.hsbc.com/x-open-banking/v2.2

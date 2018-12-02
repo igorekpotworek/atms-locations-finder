@@ -1,18 +1,24 @@
 package com.worldremit.atms.config;
 
 import com.worldremit.atms.domain.Distance;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
 @ConfigurationProperties("finder")
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 public class ATMLocationsFinderProperties {
-  @Setter @Getter private int maxRadiusInMiles;
-  @Setter @Getter private int maxResults;
+  private int maxUnderlyingClientRadiusInMiles;
+  private int maxResults;
 
-  public Distance getMaxRadius() {
-    return Distance.ofMiles(maxRadiusInMiles);
+  public Distance getMaxUnderlyingClientRadius() {
+    return Distance.ofMiles(maxUnderlyingClientRadiusInMiles);
   }
 }
