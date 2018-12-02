@@ -17,7 +17,7 @@ import static java.util.stream.Collectors.toSet;
 
 // starting from square inscribed in a maximum available by API circle and provided center,
 // incrementally adding new layers consisting from such squares to the grid till finding
-// all atms which fit provided conditions (distance for center and maximum number of results)
+// all atms which fit provided conditions (distance from center and maximum number of results)
 @Service
 class CircleCoveringAlgorithm {
 
