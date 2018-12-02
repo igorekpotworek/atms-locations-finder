@@ -43,5 +43,4 @@ class Grid {
         }
         return centers;
     }
-
 }

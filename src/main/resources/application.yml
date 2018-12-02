@@ -1,5 +1,9 @@
 logging.level.com.worldremit.atms.clients.ATMClient: DEBUG
 
 finder:
-  maxRadius: 10
+  maxRadiusInMiles: 10
   maxResults: 21
+
+client:
+  url: https://api.hsbc.com/x-open-banking/v2.2
+  uri: /atms/geo-location/lat/{lat}/long/{long}

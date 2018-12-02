@@ -43,7 +43,7 @@ class CircleCoveringAlgorithm {
                     return new AlgorithmIteration(
                             i, Sets.union(nLayerLocations, previousIteration.getResults()), currentRadius);
                 })
-                .dropWhile(it -> it.test(radius, properties.getMaxResults()))
+                .dropWhile(it -> !it.test(radius, properties.getMaxResults()))
                 .head()
                 .getResults();
   }

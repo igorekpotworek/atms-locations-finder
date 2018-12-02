@@ -10,10 +10,11 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties("finder")
 public class ATMLocationsFinderProperties {
     @Setter
-    private int maxRadius;
+    @Getter
+    private int maxRadiusInMiles;
   @Setter @Getter private int maxResults;
 
     public Distance getMaxRadius() {
-        return Distance.ofMiles(maxRadius);
+        return Distance.ofMiles(maxRadiusInMiles);
     }
 }

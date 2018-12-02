@@ -6,7 +6,8 @@ import lombok.Value;
 @Value
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class ATMLocation {
-    @EqualsAndHashCode.Include private String id;
+    @EqualsAndHashCode.Include
+    private String id;
     private Coordinates coordinates;
     private Distance distanceFromCenter;
 
@@ -15,5 +16,4 @@ public class ATMLocation {
         this.coordinates = coordinates;
         this.distanceFromCenter = coordinates.distance(center);
     }
-
 }

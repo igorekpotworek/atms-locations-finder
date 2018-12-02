@@ -7,13 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(
-    value = "atms",
-    url = "https://api.hsbc.com/x-open-banking/v2.2",
-    configuration = ATMClientConfiguration.class)
+@FeignClient(value = "atms", url = "${client.url}", configuration = ATMClientConfiguration.class)
 public interface ATMClient {
 
-  @GetMapping("/atms/geo-location/lat/{lat}/long/{long}")
+    @GetMapping("${client.uri}")
   AvailableATMs availableATMs(
       @PathVariable("lat") double latitude,
       @PathVariable("long") double longitude,
