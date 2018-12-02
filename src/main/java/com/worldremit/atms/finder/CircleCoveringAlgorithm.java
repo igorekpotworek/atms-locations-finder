@@ -35,13 +35,13 @@ class CircleCoveringAlgorithm {
   Set<ATMLocation> getAtmLocationsUsingSmallerRequests(Coordinates center, Distance radius) {
     Set<ATMLocation> interior =
         atmGateway.availableATMLocations(center, properties.getMaxUnderlyingClientRadius());
-    AlgorithmResult firstIteration = new AlgorithmResult(0, interior, radiusForLayerNumber(0));
+    AlgorithmResult firstIteration = new AlgorithmResult(0, interior, fullyCoveredRadiusForLayerNumber(0));
 
     return Stream.iterate(
             firstIteration,
             (previousIteration) -> {
               int i = previousIteration.getIterationNumber() + 1;
-              Distance currentRadius = radiusForLayerNumber(i);
+              Distance currentRadius = fullyCoveredRadiusForLayerNumber(i);
               Set<ATMLocation> nLayerLocations = getATMsFromNLayerOfGrid(center, i, radius);
               return new AlgorithmResult(
                   i, Sets.union(nLayerLocations, previousIteration.getResults()), currentRadius);
@@ -52,16 +52,29 @@ class CircleCoveringAlgorithm {
   }
 
   private Set<ATMLocation> getATMsFromNLayerOfGrid(Coordinates center, int n, Distance radius) {
-    return grid.coordinatesOfNLayerEdgeSquares(center, n)
-        .stream()
-        .map(atmGateway::availableATMLocations)
-        .flatMap(Collection::stream)
-        .filter(l -> l.getDistanceFromCenter().compareTo(radius) <= 0)
-        .collect(toSet());
+    Set<ATMLocation> atms =
+        grid.coordinatesOfNLayerEdgeSquares(center, n)
+            .stream()
+            .map(atmGateway::availableATMLocations)
+            .flatMap(Collection::stream)
+            .collect(toSet());
+    return filterATMsIfNeeded(atms, n, radius);
+  }
+
+  private Set<ATMLocation> filterATMsIfNeeded(Set<ATMLocation> atms, int n, Distance radius) {
+    if (maximumScopeForLayerNumber(n).compareTo(radius) > 0)
+      return atms.stream()
+          .filter(l -> l.getDistanceFromCenter().compareTo(radius) <= 0)
+          .collect(toSet());
+    else return atms;
+  }
+
+  private Distance maximumScopeForLayerNumber(int n) {
+    return Distance.ofMiles(grid.nLayerSide(n).getMiles() / sqrt(2));
   }
 
   // diameter is equal to grid size
-  private Distance radiusForLayerNumber(int n) {
+  private Distance fullyCoveredRadiusForLayerNumber(int n) {
     return Distance.ofMiles(grid.nLayerSide(n).getMiles() / 2);
   }
 }
