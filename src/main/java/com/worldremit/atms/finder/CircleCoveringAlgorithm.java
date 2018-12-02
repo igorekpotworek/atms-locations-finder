@@ -31,16 +31,15 @@ class CircleCoveringAlgorithm {
 
   Set<ATMLocation> getAtmLocationsUsingSmallerRequests(Coordinates center, Distance radius) {
     Set<ATMLocation> interior = atmGateway.availableATMLocations(center, properties.getMaxRadius());
-    AlgorithmIteration algorithmZeroIteration =
-        new AlgorithmIteration(0, interior, radiusForLayerNumber(0));
+    AlgorithmResult firstIteration = new AlgorithmResult(0, interior, radiusForLayerNumber(0));
 
     return Stream.iterate(
-            algorithmZeroIteration,
+            firstIteration,
             (previousIteration) -> {
               int i = previousIteration.getIterationNumber() + 1;
               Distance currentRadius = radiusForLayerNumber(i);
               Set<ATMLocation> nLayerLocations = getATMsFromNLayerOfGrid(center, i, radius);
-              return new AlgorithmIteration(
+              return new AlgorithmResult(
                   i, Sets.union(nLayerLocations, previousIteration.getResults()), currentRadius);
             })
         .dropWhile(it -> !it.test(radius, properties.getMaxResults()))

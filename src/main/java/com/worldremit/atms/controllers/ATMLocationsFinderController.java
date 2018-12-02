@@ -24,12 +24,12 @@ public class ATMLocationsFinderController {
 
   @GetMapping("atm")
   public Set<ATMLocation> availableATMs(
-      @RequestParam(value = "lat", defaultValue = "51.50551621597067") double lat,
-      @RequestParam(value = "long", defaultValue = "-0.0180120225995") double lon,
-      @RequestParam(value = "radius", required = false, defaultValue = "10") double radius,
+      @RequestParam(value = "lat") double latitude,
+      @RequestParam(value = "long") double longitude,
+      @RequestParam(value = "radius", required = false, defaultValue = "1") double radius,
       @RequestParam(value = "unit", required = false, defaultValue = "mi") Distance.Unit unit) {
     return atmLocationsFinder.limitedAvailableATMsLocations(
-        new Coordinates(lat, lon), Distance.of(radius, unit));
+        new Coordinates(latitude, longitude), Distance.of(radius, unit));
   }
 
   @InitBinder

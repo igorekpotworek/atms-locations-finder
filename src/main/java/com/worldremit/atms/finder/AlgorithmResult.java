@@ -7,7 +7,7 @@ import lombok.Value;
 import java.util.Set;
 
 @Value
-class AlgorithmIteration {
+class AlgorithmResult {
 
   private int iterationNumber;
   private Set<ATMLocation> results;
