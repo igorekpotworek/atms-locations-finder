@@ -19,13 +19,13 @@ public class Coordinates {
     this.longitude = longitude;
   }
 
-    public Coordinates move(Distance distanceByLatitude, Distance distanceByLongitude) {
+  public Coordinates move(Distance distanceByLatitude, Distance distanceByLongitude) {
     return new Coordinates(
-            latitude + distanceByLatitude.toDegreesLat(),
-            longitude + distanceByLongitude.toDegreesLong(latitude));
+        latitude + distanceByLatitude.toDegreesLat(),
+        longitude + distanceByLongitude.toDegreesLong(latitude));
   }
 
-    Distance distance(Coordinates other) {
+  Distance distance(Coordinates other) {
     double theta = longitude - other.longitude;
     double dist =
         sin(toRadians(latitude)) * sin(toRadians(other.latitude))
@@ -33,6 +33,6 @@ public class Coordinates {
     dist = acos(dist);
     dist = toDegrees(dist);
     dist = dist * 69.1;
-        return Distance.ofMiles(dist);
+    return Distance.ofMiles(dist);
   }
 }

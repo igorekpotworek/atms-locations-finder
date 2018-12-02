@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(value = "atms", url = "${client.url}", configuration = ATMClientConfiguration.class)
 public interface ATMClient {
 
-    @GetMapping("${client.uri}")
+  @GetMapping("${client.uri}")
   AvailableATMs availableATMs(
       @PathVariable("lat") double latitude,
       @PathVariable("long") double longitude,

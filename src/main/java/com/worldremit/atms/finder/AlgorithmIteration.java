@@ -9,11 +9,11 @@ import java.util.Set;
 @Value
 class AlgorithmIteration {
 
-    private int iterationNumber;
-    private Set<ATMLocation> results;
-    private Distance currentRadius;
+  private int iterationNumber;
+  private Set<ATMLocation> results;
+  private Distance currentRadius;
 
-    boolean test(Distance radius, int maxResults) {
-        return currentRadius.compareTo(radius) >= 0 || results.size() >= maxResults;
-    }
+  boolean test(Distance radius, int maxResults) {
+    return currentRadius.compareTo(radius) >= 0 || results.size() >= maxResults;
+  }
 }

@@ -20,16 +20,16 @@ public class ATMGateway {
   private final ATMLocationsFinderProperties atmLocationsFinderProperties;
   private final ATMClient atmClient;
 
-    public Set<ATMLocation> availableATMLocations(Coordinates center, Distance radius) {
+  public Set<ATMLocation> availableATMLocations(Coordinates center, Distance radius) {
     return atmClient
-            .availableATMs(center.getLatitude(), center.getLongitude(), (int) ceil(radius.getMiles()))
+        .availableATMs(center.getLatitude(), center.getLongitude(), (int) ceil(radius.getMiles()))
         .getAtms()
-            .stream()
-            .map(atm -> new ATMLocation(atm.getId(), atm.getCoordinates(), center))
-            .collect(toSet());
+        .stream()
+        .map(atm -> new ATMLocation(atm.getId(), atm.getCoordinates(), center))
+        .collect(toSet());
   }
 
-    public Set<ATMLocation> availableATMLocations(Coordinates center) {
-        return availableATMLocations(center, atmLocationsFinderProperties.getMaxRadius());
+  public Set<ATMLocation> availableATMLocations(Coordinates center) {
+    return availableATMLocations(center, atmLocationsFinderProperties.getMaxRadius());
   }
 }
