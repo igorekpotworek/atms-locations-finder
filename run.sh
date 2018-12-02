@@ -3,3 +3,5 @@
 # mvn clean package
 # java -jar target/your-application-1.0-SNAPSHOT.jar
 echo Building and running the application
+./gradlew clean build
+java -jar build/libs/atms-locations-finder-1.0-SNAPSHOT.jar
