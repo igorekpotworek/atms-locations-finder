@@ -1,4 +1,4 @@
-package com.worldremit.config;
+package com.worldremit.atms.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

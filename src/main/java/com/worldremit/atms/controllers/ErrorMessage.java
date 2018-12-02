@@ -1,4 +1,4 @@
-package com.worldremit.controllers;
+package com.worldremit.atms.controllers;
 
 import lombok.Value;
 

@@ -1,4 +1,4 @@
-package com.worldremit.config;
+package com.worldremit.atms.config;
 
 import feign.Logger;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,4 @@
-package com.worldremit.domain;
+package com.worldremit.atms.domain;
 
 import lombok.EqualsAndHashCode;
 import lombok.Value;
@@ -8,11 +8,12 @@ import lombok.Value;
 public class ATMLocation {
     @EqualsAndHashCode.Include private String id;
     private Coordinates coordinates;
-    private double distanceFromCenter;
+    private Distance distanceFromCenter;
 
     public ATMLocation(String id, Coordinates coordinates, Coordinates center) {
         this.id = id;
         this.coordinates = coordinates;
         this.distanceFromCenter = coordinates.distance(center);
     }
+
 }

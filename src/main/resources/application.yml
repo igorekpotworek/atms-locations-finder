@@ -1,4 +1,4 @@
-logging.level.com.worldremit.clients.ATMClient: DEBUG
+logging.level.com.worldremit.atms.clients.ATMClient: DEBUG
 
 finder:
   maxRadius: 10

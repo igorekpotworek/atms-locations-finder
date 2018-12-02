@@ -1,4 +1,4 @@
-package com.worldremit.infrastructure;
+package com.worldremit.atms.infrastructure;
 
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.core.TreeNode;

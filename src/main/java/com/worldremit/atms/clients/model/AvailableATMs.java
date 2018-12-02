@@ -1,4 +1,4 @@
-package com.worldremit.clients.model;
+package com.worldremit.atms.clients.model;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.ObjectCodec;
@@ -15,8 +15,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static com.worldremit.infrastructure.JacksonHelper.getFirstElementFromArray;
-import static com.worldremit.infrastructure.JacksonHelper.treeToValue;
+import static com.worldremit.atms.infrastructure.JacksonHelper.getFirstElementFromArray;
+import static com.worldremit.atms.infrastructure.JacksonHelper.treeToValue;
 
 @Value
 @JsonDeserialize(using = AvailableATMs.AvailableATMsDeserializer.class)
