@@ -3,6 +3,7 @@ package com.worldremit.atms.controllers;
 import com.worldremit.atms.domain.ATMLocation;
 import com.worldremit.atms.domain.Coordinates;
 import com.worldremit.atms.domain.Distance;
+import com.worldremit.atms.domain.Distance.Unit;
 import com.worldremit.atms.finder.ATMLocationsFinder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -27,19 +28,19 @@ public class ATMLocationsFinderController {
       @RequestParam(value = "lat") double latitude,
       @RequestParam(value = "long") double longitude,
       @RequestParam(value = "radius", required = false, defaultValue = "1") double radius,
-      @RequestParam(value = "unit", required = false, defaultValue = "mi") Distance.Unit unit) {
+      @RequestParam(value = "unit", required = false, defaultValue = "m") Unit unit) {
     return atmLocationsFinder.limitedAvailableATMsLocations(
         new Coordinates(latitude, longitude), Distance.of(radius, unit));
   }
 
   @InitBinder
   public void initBinder(final WebDataBinder webdataBinder) {
-    webdataBinder.registerCustomEditor(Distance.Unit.class, new DistanceUnitConverter());
+    webdataBinder.registerCustomEditor(Unit.class, new DistanceUnitConverter());
   }
 
   public static class DistanceUnitConverter extends PropertyEditorSupport {
     public void setAsText(final String text) {
-      setValue(Distance.Unit.fromString(text));
+      setValue(Unit.fromString(text));
     }
   }
 }

@@ -6,8 +6,7 @@ import lombok.Value;
 
 import java.util.Arrays;
 
-import static com.worldremit.atms.domain.Distance.Unit.Kilometers;
-import static com.worldremit.atms.domain.Distance.Unit.Miles;
+import static com.worldremit.atms.domain.Distance.Unit.*;
 import static io.vavr.API.*;
 import static java.lang.Math.cos;
 import static java.lang.Math.toRadians;
@@ -21,11 +20,16 @@ public class Distance implements Comparable<Distance> {
     return Distance.ofMiles(0.621371192 * kilometers);
   }
 
+  private static Distance ofMeters(double meters) {
+    return ofKilometers(meters / 1000.0);
+  }
+
   public static Distance of(double distance, Unit unit) {
     return Match(unit)
         .of(
             Case(API.$(Kilometers), ofKilometers(distance)),
             Case(API.$(Miles), ofMiles(distance)),
+            Case(API.$(Meters), ofMeters(distance)),
             Case(
                 $(),
                 () -> {
@@ -48,6 +52,7 @@ public class Distance implements Comparable<Distance> {
 
   @RequiredArgsConstructor
   public enum Unit {
+    Meters("m"),
     Kilometers("km"),
     Miles("mi");
 

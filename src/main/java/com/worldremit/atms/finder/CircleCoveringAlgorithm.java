@@ -58,6 +58,6 @@ class CircleCoveringAlgorithm {
 
   // diameter is equal to grid size
   private Distance radiusForLayerNumber(int n) {
-    return Distance.ofMiles(grid.gridNLayerSide(n).getMiles() / 2);
+    return Distance.ofMiles(grid.nLayerSide(n).getMiles() / 2);
   }
 }

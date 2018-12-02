@@ -17,7 +17,7 @@ class Grid {
   }
 
   // number of small squares sizes
-  Distance gridNLayerSide(int n) {
+  Distance nLayerSide(int n) {
     return Distance.ofMiles(numberOfSquaresOnNLayerSide(n) * gridSquareSide);
   }
 
