@@ -15,6 +15,9 @@ import java.util.Set;
 import static java.lang.Math.sqrt;
 import static java.util.stream.Collectors.toSet;
 
+// starting from square inscribed in a maximum available by API circle and provided center,
+// incrementally adding new layers consisting from such squares to the grid till finding
+// all atms which fit provided conditions (distance for center and maximum number of results)
 @Service
 class CircleCoveringAlgorithm {
 
@@ -30,7 +33,8 @@ class CircleCoveringAlgorithm {
   }
 
   Set<ATMLocation> getAtmLocationsUsingSmallerRequests(Coordinates center, Distance radius) {
-    Set<ATMLocation> interior = atmGateway.availableATMLocations(center, properties.getMaxUnderlyingClientRadius());
+    Set<ATMLocation> interior =
+        atmGateway.availableATMLocations(center, properties.getMaxUnderlyingClientRadius());
     AlgorithmResult firstIteration = new AlgorithmResult(0, interior, radiusForLayerNumber(0));
 
     return Stream.iterate(
