@@ -35,7 +35,8 @@ class CircleCoveringAlgorithm {
   Set<ATMLocation> getAtmLocationsUsingSmallerRequests(Coordinates center, Distance radius) {
     Set<ATMLocation> interior =
         atmGateway.availableATMLocations(center, properties.getMaxUnderlyingClientRadius());
-    AlgorithmResult firstIteration = new AlgorithmResult(0, interior, fullyCoveredRadiusForLayerNumber(0));
+    AlgorithmResult firstIteration =
+        new AlgorithmResult(0, interior, fullyCoveredRadiusForLayerNumber(0));
 
     return Stream.iterate(
             firstIteration,
@@ -62,11 +63,13 @@ class CircleCoveringAlgorithm {
   }
 
   private Set<ATMLocation> filterATMsIfNeeded(Set<ATMLocation> atms, int n, Distance radius) {
-    if (maximumScopeForLayerNumber(n).compareTo(radius) > 0)
+    if (maximumScopeForLayerNumber(n).compareTo(radius) > 0) {
       return atms.stream()
           .filter(l -> l.getDistanceFromCenter().compareTo(radius) <= 0)
           .collect(toSet());
-    else return atms;
+    } else {
+      return atms;
+    }
   }
 
   private Distance maximumScopeForLayerNumber(int n) {
